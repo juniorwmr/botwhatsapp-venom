@@ -8,10 +8,16 @@
 <p align="center">🚀 Projeto criado com o intuito de auxiliar nas demandas de pedidos da empresa "Delícias da Neide" via WhatsApp.</p>
 <br>
 <h1 align="center">
+  * Welcome
   <img alt="Welcome" title="Welcome" src="./assets/welcome.png" />
+  * Menu
   <img alt="Menu" title="Menu" src="./assets/menu.png" />
+  * Order
   <img alt="Order" title="Order" src="./assets/order.png" />
+  * Address
   <img alt="Address" title="Address" src="./assets/address.png" />
-  <img alt="Bill" title="Bill" src="./assets/bill.png" />g" />
+  * Bill
+  <img alt="Bill" title="Bill" src="./assets/bill.png" />
+  * Assistant
   <img alt="Assistant" title="Assistant" src="./assets/assistant.png" />
 </h1>
