@@ -1,5 +1,5 @@
 # Whasapp Bot with VENOM-BOT
-## Descrição do Projeto.
+## Descrição do Projeto
 <p align="center"></p>
 <h1 align="center">
     <a href="https://nodejs.org/en/">🔗 NodeJS</a>
@@ -49,3 +49,21 @@ $ yarn dev
 
 ## Pronto, escaneie o código QR do Whatsapp e Voilà, aproveite!
 ```
+
+### 🛠 Tecnologias
+
+As seguintes ferramentas foram usadas na construção do projeto:
+
+- [Node.js](https://nodejs.org/en/)
+
+### Autor
+---
+
+<a href="https://juniorwmr.github.io/">
+ <img style="border-radius: 30;" src="https://juniorwmr.github.io/images/washington-muniz.jpg" width="100px;" alt=""/>
+ <br />
+
+Feito com ❤️ por Washington Muniz 👋🏽 Entre em contato!
+
+[![Twitter Badge](https://img.shields.io/badge/-@juniorwmr-1ca0f1?style=flat-square&labelColor=1ca0f1&logo=twitter&logoColor=white&link=https://twitter.com/juniorwmr)](https://twitter.com/juniorwmr) [![Linkedin Badge](https://img.shields.io/badge/-Thiago-blue?style=flat-square&logo=Linkedin&logoColor=white&link=https://www.linkedin.com/in/juniorwmr/)](https://www.linkedin.com/in/juniorwmr/) 
+[![Gmail Badge](https://img.shields.io/badge/-juniorwmr@gmail.com-c14438?style=flat-square&logo=Gmail&logoColor=white&link=mailto:juniorripardo@gmail.com)](mailto:juniorripardo@gmail.com)
