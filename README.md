@@ -1,4 +1,4 @@
-# Whasapp Bot with VENOM-BOT
+# Whatsapp Bot with VENOM-BOT
 ## Descrição do Projeto
 <p align="center"></p>
 <h1 align="center">
