@@ -1,5 +1,5 @@
-module.exports = 
-"Abraão Alab --> *5 reais* \
+export const neighborhoods =
+  'Abraão Alab --> *5 reais* \
 \nAdalberto Aragão --> *5 reais* \
 \nAeroporto Velho --> *5 reais* \
 \nAreial --> *6 reais* \
@@ -77,4 +77,4 @@ module.exports =
 \nVillage --> *5 reais* \
 \nVitória --> *5 reais*  \
 \nVolta Seca --> *5 reais* \
-\nWanderley Dantas --> *5 reais*"
+\nWanderley Dantas --> *5 reais*';

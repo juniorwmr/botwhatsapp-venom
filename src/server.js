@@ -1,44 +1,28 @@
-require('dotenv').config()
-
-const { create } = require("venom-bot");
-const database = require("./db");
-const stages = require("./stages");
-const { secundary_number } = require('./config');
-
-function getStage(user) {
-  if (database[user]) {
-    return database[user].stage;
-  } else {
-    database[user] = {
-      stage: 0,
-      itens: [],
-      address: '',
-    };
-    return database[user].stage;
-  }
-};
+import { create } from 'venom-bot';
+import { stages, getStage } from './stages.js';
 
 create().then((client) => start(client));
 
 async function start(client) {
   await client.onMessage(async (message) => {
-    const user = getStage(message.from);
-    const resp = stages[user].stage.exec({user: message.from, message: message.body, client});
-    if (user === 4) {
-      await client.sendText(secundary_number, resp);
-      await client.sendText(message.from, '✅ *Prontinho, pedido feito!* \n\nAgora, se você ainda não sabe o valor da taxa de entrega para sua região, vou te passar para um atendente para que ele verique o valor da *taxa de entrega*. \n\n⏳ *Aguarde um instante*.');
-    } else if (user === 5) {
-      await client.markUnseenMessage(message.from);
-    } else {
-      await client.sendText(message.from, resp);
+    try {
+      const currentStage = getStage({ from: message.from });
+
+      const messageResponse = stages[currentStage].stage.exec({
+        from: message.from,
+        message: message.body,
+        client,
+      });
+
+      if (messageResponse) {
+        await client.sendText(message.from, messageResponse);
+      }
+    } catch (error) {
+      client.close();
     }
-  })
-  // close the connection with the client correctly  
-  process.on('SIGINT', function() {
-    console.log('oi');
+  });
+
+  process.on('SIGINT', function () {
     client.close();
   });
 }
-
-
-

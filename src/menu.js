@@ -1,22 +1,22 @@
-module.exports = {
+export const menu = {
   1: {
-    description: "Leite Ninho",
+    description: 'Leite Ninho',
     price: 6,
   },
   2: {
-    description: "Alpino",
+    description: 'Alpino',
     price: 6,
   },
   3: {
-    description: "Prestígio",
+    description: 'Prestígio',
     price: 6,
   },
   4: {
-    description: "Abacaxi",
+    description: 'Abacaxi',
     price: 6,
   },
   5: {
-    description: "Dois Amores",
+    description: 'Dois Amores',
     price: 6,
   },
 };
