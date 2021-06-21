@@ -5,20 +5,22 @@ create().then((client) => start(client));
 
 async function start(client) {
   await client.onMessage(async (message) => {
-    try {
-      const currentStage = getStage({ from: message.from });
+    if (message.isGroupMsg === false) {
+      try {
+        const currentStage = getStage({ from: message.from });
 
-      const messageResponse = stages[currentStage].stage.exec({
-        from: message.from,
-        message: message.body,
-        client,
-      });
+        const messageResponse = stages[currentStage].stage.exec({
+          from: message.from,
+          message: message.body,
+          client,
+        });
 
-      if (messageResponse) {
-        await client.sendText(message.from, messageResponse);
+        if (messageResponse) {
+          await client.sendText(message.from, messageResponse);
+        }
+      } catch (error) {
+        client.close();
       }
-    } catch (error) {
-      client.close();
     }
   });
 
