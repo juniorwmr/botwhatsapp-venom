@@ -1,8 +1,7 @@
-//import { create } from 'venom-bot';
-import venom from '../venom/dist/';
+import { create } from 'venom-bot';
 import { stages, getStage } from './stages.js';
 
-venom.create(
+create(
 	//session
 	'Bot-Whatsapp', //Pass the name of the client you want to start the bot
 	//catchQR

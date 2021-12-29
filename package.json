@@ -8,6 +8,6 @@
     "start": "node src/server.js"
   },
   "dependencies": {
-    "venom-bot": "^3.0.14"
+    "venom-bot": "^4.0.4"
   }
 }
