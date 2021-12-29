@@ -34,16 +34,31 @@ Além disto, é bom ter um editor para trabalhar com o código como [VSCode](htt
 
 ```bash
 # Clone este repositório
-$ git clone git@github.com:juniorwmr/botwhatsapp-venom.git
+$ git clone https://github.com/AlanMartines/botwhatsapp-venom.git
 
 # Acesse a pasta do projeto no terminal/cmd
 $ cd botwhatsapp-venom
 
 # Instale as dependências
-$ npm install
+$ npm install --allow-root --unsafe-perm=true
+
+# Clone este repositório
+$ git clone https://github.com/orkestral/venom.git
+
+# Acesse a pasta do projeto no terminal/cmd
+$ cd venom
+
+# Instale as dependências
+$ npm install --allow-root --unsafe-perm=true
+
+# Building Venom
+$ npm run build
+
+# Ir para seu diretório anterior
+$ cd ..
 
 # Execute a aplicação em modo de desenvolvimento
-$ yarn dev
+$ npm start
 
 ## Pronto, escaneie o código QR do Whatsapp e Voilà, aproveite!
 ```
