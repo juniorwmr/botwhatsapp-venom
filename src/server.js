@@ -1,6 +1,6 @@
 require('dotenv').config()
 
-const venom = require('./venom/dist/');
+const venom = require('../venom/dist/');
 const database = require("./db");
 const stages = require("./stages");
 const { secundary_number } = require('./config');
@@ -134,7 +134,7 @@ venom
 	)
 	.then((client) => {
 		var browserSessionToken = await client.getSessionTokenBrowser();
-    console.log("- Token venom:\n", JSON.parse(JSON.stringify(browserSessionToken)));
+		console.log("- Token venom:\n", JSON.parse(JSON.stringify(browserSessionToken)));
 		start(client);
 	})
 	.catch((erro) => {
@@ -146,20 +146,78 @@ async function start(client) {
 		const user = getStage(message.from);
 		const resp = stages[user].stage.exec({ user: message.from, message: message.body, client });
 		if (user === 4) {
-			await client.sendText(secundary_number, resp);
-			await client.sendText(message.from, '✅ *Prontinho, pedido feito!* \n\nAgora, se você ainda não sabe o valor da taxa de entrega para sua região, vou te passar para um atendente para que ele verique o valor da *taxa de entrega*. \n\n⏳ *Aguarde um instante*.');
+			// Check if the number exists
+			await client.checkNumberStatus(secundary_number)
+				.then((result) => {
+					//console.log('Result: ', result); //return object success
+					if (result.status === 200 && result.numberExists === true) {
+					// Send basic text
+					await client.sendText(result.id.user, resp).then((result) => {
+						//console.log('Result: ', result); //return object success
+					}).catch((erro) => {
+						console.error('Error when sending: ', erro); //return object error
+					});
+				}else{
+					console.error('O número informado pode receber mensagens via whatsapp'); //return object error
+				}
+					await client.sendText(message.from, '✅ *Prontinho, pedido feito!* \n\nAgora, se você ainda não sabe o valor da taxa de entrega para sua região, vou te passar para um atendente para que ele verique o valor da *taxa de entrega*. \n\n⏳ *Aguarde um instante*.')
+					.then((result) => {
+						//console.log('Result: ', result); //return object success
+					}).catch((erro) => {
+						console.error('Error when sending: ', erro); //return object error
+					});
+				}).catch((erro) => {
+					console.error('Error when sending: ', erro); //return object error
+				});
 		} else if (user === 5) {
-			await client.markUnseenMessage(message.from);
+			// Mark chat as not seen (returns true if it works)
+			await client.markUnseenMessage(message.from)
+				.then((result) => {
+					//console.log('Result: ', result); //return object success
+				}).catch((erro) => {
+					console.error('Error when sending: ', erro); //return object error
+				});
 		} else {
-			await client.sendText(message.from, resp);
+			// Send basic text
+			await client.sendText(message.from, resp).then((result) => {
+				//console.log('Result: ', result); //return object success
+			}).catch((erro) => {
+				console.error('Error when sending: ', erro); //return object error
+			});
 		}
-	})
-	// close the connection with the client correctly  
-	process.on('SIGINT', function () {
-		console.log('oi');
-		client.close();
 	});
 }
-
-
-
+//
+process.stdin.resume(); //so the program will not close instantly
+//
+async function exitHandler(options, exitCode) {
+	if (options.cleanup) {
+		console.log("- Cleanup");
+	}
+	if (exitCode || exitCode === 0) {
+		console.log(exitCode);
+	}
+	//
+	if (options.exit) {
+		process.exit();
+	}
+} //exitHandler
+//do something when sistema is closing
+process.on('exit', exitHandler.bind(null, {
+	cleanup: true
+}));
+//catches ctrl+c event
+process.on('SIGINT', exitHandler.bind(null, {
+	exit: true
+}));
+// catches "kill pid" (for example: nodemon restart)
+process.on('SIGUSR1', exitHandler.bind(null, {
+	exit: true
+}));
+process.on('SIGUSR2', exitHandler.bind(null, {
+	exit: true
+}));
+//catches uncaught exceptions
+process.on('uncaughtException', exitHandler.bind(null, {
+	exit: true
+}));

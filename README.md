@@ -42,9 +42,9 @@ $ cd botwhatsapp-venom
 # Instale as dependências
 $ npm install --allow-root --unsafe-perm=true
 
-# Crie um arquivo .env na pasta raiz e adicione a variavel NUMBER (<telefone>@c.us) - eg. 556899999999@c.us
+# Crie um arquivo .env na pasta raiz e set valor na variavel NUMBER (<telefone>) - eg. 556899999999
 # Esse telefone irá receber as informações referente ao pedido em andamento via Whatsapp
-$ vim .env
+$ cp .env-example .env
 
 # Clone este repositório
 $ git clone https://github.com/orkestral/venom.git

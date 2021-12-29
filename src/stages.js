@@ -24,6 +24,5 @@ const stages = [
       stage: require('./stages/5')
     },
 ]
-  
 
 module.exports = stages;
