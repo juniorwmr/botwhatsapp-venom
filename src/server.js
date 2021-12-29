@@ -26,21 +26,17 @@ venom
 		(base64Qrimg, asciiQR, attempts, urlCode) => {
 			//
 			console.log('- Número de tentativas de ler o qr-code:', attempts);
-			session.attempts = attempts;
 			//
 			console.log("- Captura do QR-Code");
 			//console.log(base64Qrimg);
-			session.qrcode = base64Qrimg;
 			//
 			console.log("- Captura do asciiQR");
 			// Registrar o QR no terminal
 			//console.log(asciiQR);
-			session.CodeasciiQR = asciiQR;
 			//
 			console.log("- Captura do urlCode");
 			// Registrar o QR no terminal
 			//console.log(urlCode);
-			session.CodeurlCode = urlCode;
 			//
 			var qrCode = base64Qrimg.replace('data:image/png;base64,', '');
 			const imageBuffer = Buffer.from(qrCode, 'base64');
