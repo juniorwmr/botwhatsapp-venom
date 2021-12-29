@@ -139,12 +139,18 @@ async function start(client) {
 				if (messageResponse) {
 					await client.sendText(message.from, messageResponse).then((result) => {
 						//console.log('Result: ', result); //return object success
+						console.log('Menssagem enviada com sucesso para: ', message.from); //return object success
 					}).catch(async (erro) => {
 						console.error('Error when sending: ', erro); //return object error
 					});
 				}
 			} catch (error) {
-				client.close();
+				client.close().then((result) => {
+					//console.log('Result: ', result); //return object success
+					console.log('Sessão fechada com sucesso: ', result); //return object success
+				}).catch(async (erro) => {
+					console.error('Error when close: ', erro); //return object error
+				});
 			}
 		}
 	});
