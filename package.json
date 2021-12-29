@@ -1,13 +1,13 @@
 {
   "name": "botwhatsapp",
-  "type": "module",
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "dev": "node src/server.js"
+    "start": "node src/server.js"
   },
+  "devDependencies": {},
   "dependencies": {
-    "venom-bot": "^3.0.14"
+    "dotenv": "^10.0.0"
   }
 }
