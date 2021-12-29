@@ -118,11 +118,12 @@ create(
 		console.log("- Token venom:\n", JSON.parse(JSON.stringify(browserSessionToken)));
 		start(client);
 	}).catch(async (erro) => {
-		console.log(erro);
+		console.error(erro);
 	});
 
 	async function start(client) {
 		await client.onMessage(async (message) => {
+			console.log('Menssagem recebida');
 			if (message.isGroupMsg === false) {
 				try {
 					const currentStage = getStage({ from: message.from });
