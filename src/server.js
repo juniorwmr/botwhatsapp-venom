@@ -21,7 +21,7 @@ function getStage(user) {
 venom
 	.create(
 		//session
-		'Boot', //Pass the name of the client you want to start the bot
+		'Bot-Whatsapp', //Pass the name of the client you want to start the bot
 		//catchQR
 		(base64Qrimg, asciiQR, attempts, urlCode) => {
 			//
@@ -132,12 +132,12 @@ venom
 			waPage.screenshot({ path: 'screenshot.png' });
 		}
 	)
-	.then((client) => {
+	.then(async (client) => {
 		var browserSessionToken = await client.getSessionTokenBrowser();
 		console.log("- Token venom:\n", JSON.parse(JSON.stringify(browserSessionToken)));
 		start(client);
 	})
-	.catch((erro) => {
+	.catch(async (erro) => {
 		console.log(erro);
 	});
 
@@ -148,31 +148,31 @@ async function start(client) {
 		if (user === 4) {
 			// Check if the number exists
 			await client.checkNumberStatus(secundary_number)
-				.then((result) => {
+				.then(async (result) => {
 					//console.log('Result: ', result); //return object success
 					if (result.status === 200 && result.numberExists === true) {
 					// Send basic text
 					await client.sendText(result.id.user, resp).then((result) => {
 						//console.log('Result: ', result); //return object success
-					}).catch((erro) => {
+					}).catch(async (erro) => {
 						console.error('Error when sending: ', erro); //return object error
 					});
 				}else{
 					console.error('O número informado pode receber mensagens via whatsapp'); //return object error
 				}
 					await client.sendText(message.from, '✅ *Prontinho, pedido feito!* \n\nAgora, se você ainda não sabe o valor da taxa de entrega para sua região, vou te passar para um atendente para que ele verique o valor da *taxa de entrega*. \n\n⏳ *Aguarde um instante*.')
-					.then((result) => {
+					.then(async (result) => {
 						//console.log('Result: ', result); //return object success
 					}).catch((erro) => {
 						console.error('Error when sending: ', erro); //return object error
 					});
-				}).catch((erro) => {
+				}).catch(async (erro) => {
 					console.error('Error when sending: ', erro); //return object error
 				});
 		} else if (user === 5) {
 			// Mark chat as not seen (returns true if it works)
 			await client.markUnseenMessage(message.from)
-				.then((result) => {
+				.then(async (result) => {
 					//console.log('Result: ', result); //return object success
 				}).catch((erro) => {
 					console.error('Error when sending: ', erro); //return object error
@@ -181,7 +181,7 @@ async function start(client) {
 			// Send basic text
 			await client.sendText(message.from, resp).then((result) => {
 				//console.log('Result: ', result); //return object success
-			}).catch((erro) => {
+			}).catch(async (erro) => {
 				console.error('Error when sending: ', erro); //return object error
 			});
 		}
