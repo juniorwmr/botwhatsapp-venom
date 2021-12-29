@@ -1,5 +1,4 @@
-//import { create } from 'venom-bot';
-import { create } from '../venom/src/';
+import { create } from 'venom-bot';
 import { stages, getStage } from './stages.js';
 
 create(
