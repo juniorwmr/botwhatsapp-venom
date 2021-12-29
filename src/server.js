@@ -1,8 +1,7 @@
-const venom = require('../venom/dist/');
-const { stages, getStage } = require('./stages.js');
+import { create } from '../venom/dist/';
+import { stages, getStage } from './stages.js';
 
-venom
-	.create(
+create(
 		//session
 		'Bot-Whatsapp', //Pass the name of the client you want to start the bot
 		//catchQR

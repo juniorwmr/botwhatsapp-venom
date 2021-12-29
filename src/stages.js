@@ -1,13 +1,13 @@
-const {
+import {
   initialStage,
   stageOne,
   stageTwo,
   stageThree,
   stageFour,
   finalStage,
-} = require('./stages/index.js');
+} from './stages/index.js';
 
-const { storage } = require('./storage.js');
+import { storage } from './storage.js';
 
 export const stages = [
   {
