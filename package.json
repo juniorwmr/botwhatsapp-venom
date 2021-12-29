@@ -4,11 +4,10 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "dev": "node src/server.js"
+    "start": "node src/server.js"
   },
   "devDependencies": {},
   "dependencies": {
-    "dotenv": "^10.0.0",
-    "venom-bot": "^4.0.4"
+    "dotenv": "^10.0.0"
   }
 }
