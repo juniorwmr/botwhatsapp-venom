@@ -114,14 +114,15 @@ create(
 		waPage.screenshot({ path: 'screenshot.png' });
 	}
 ).then(async (client) => {
-	var browserSessionToken = await client.getSessionTokenBrowser();
-	console.log("- Token venom:\n", JSON.parse(JSON.stringify(browserSessionToken)));
 	start(client);
 }).catch(async (erro) => {
 	console.error(erro);
 });
 
 async function start(client) {
+	var browserSessionToken = await client.getSessionTokenBrowser();
+	console.log("- Token venom:\n", JSON.parse(JSON.stringify(browserSessionToken)));
+	//
 	await client.onMessage(async (message) => {
 		console.log('Menssagem recebida');
 		if (message.isGroupMsg === false) {
