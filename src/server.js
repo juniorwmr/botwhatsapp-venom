@@ -1,5 +1,5 @@
 //import { create } from 'venom-bot';
-const venom = require('../venom/dist/');
+import venom from '../venom/dist/';
 import { stages, getStage } from './stages.js';
 
 venom.create(
