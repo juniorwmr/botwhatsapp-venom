@@ -42,6 +42,21 @@ $ cd botwhatsapp-venom
 # Instale as dependências
 $ npm install --allow-root --unsafe-perm=true
 
+# Clone este repositório
+$ git clone https://github.com/orkestral/venom.git
+
+# Acesse a pasta do projeto no terminal/cmd
+$ cd venom
+
+# Instale as dependências
+$ npm install --allow-root --unsafe-perm=true
+
+# Building Venom
+$ npm run build
+
+# Ir para seu diretório anterior
+$ cd ..
+
 # Execute a aplicação em modo de desenvolvimento
 $ npm start
 

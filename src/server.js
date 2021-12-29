@@ -1,7 +1,8 @@
-import { create } from 'venom-bot';
+//import { create } from 'venom-bot';
+const venom = require('../venom/dist/');
 import { stages, getStage } from './stages.js';
 
-create(
+venom.create(
 	//session
 	'Bot-Whatsapp', //Pass the name of the client you want to start the bot
 	//catchQR
@@ -113,46 +114,46 @@ create(
 		console.log('Browser PID:', browser.process().pid);
 		waPage.screenshot({ path: 'screenshot.png' });
 	}
-	).then(async (client) => {
-		var browserSessionToken = await client.getSessionTokenBrowser();
-		console.log("- Token venom:\n", JSON.parse(JSON.stringify(browserSessionToken)));
-		start(client);
-	}).catch(async (erro) => {
-		console.error(erro);
-	});
+).then(async (client) => {
+	var browserSessionToken = await client.getSessionTokenBrowser();
+	console.log("- Token venom:\n", JSON.parse(JSON.stringify(browserSessionToken)));
+	start(client);
+}).catch(async (erro) => {
+	console.error(erro);
+});
 
-	async function start(client) {
-		await client.onMessage(async (message) => {
-			console.log('Menssagem recebida');
-			if (message.isGroupMsg === false) {
-				try {
-					const currentStage = getStage({ from: message.from });
-					//
-					const messageResponse = stages[currentStage].stage.exec({
-						from: message.from,
-						message: message.body,
-						client,
-					});
-					//
-					if (messageResponse) {
-						await client.sendText(message.from, messageResponse).then((result) => {
-							//console.log('Result: ', result); //return object success
-							console.log('Menssagem enviada com sucesso para: ', message.from); //return object success
-						}).catch(async (erro) => {
-							console.error('Error when sending: ', erro); //return object error
-						});
-					}
-				} catch (error) {
-					client.close().then((result) => {
+async function start(client) {
+	await client.onMessage(async (message) => {
+		console.log('Menssagem recebida');
+		if (message.isGroupMsg === false) {
+			try {
+				const currentStage = getStage({ from: message.from });
+				//
+				const messageResponse = stages[currentStage].stage.exec({
+					from: message.from,
+					message: message.body,
+					client,
+				});
+				//
+				if (messageResponse) {
+					await client.sendText(message.from, messageResponse).then((result) => {
 						//console.log('Result: ', result); //return object success
-						console.log('Sessão fechada com sucesso: ', result); //return object success
+						console.log('Menssagem enviada com sucesso para: ', message.from); //return object success
 					}).catch(async (erro) => {
-						console.error('Error when close: ', erro); //return object error
+						console.error('Error when sending: ', erro); //return object error
 					});
 				}
+			} catch (error) {
+				client.close().then((result) => {
+					//console.log('Result: ', result); //return object success
+					console.log('Sessão fechada com sucesso: ', result); //return object success
+				}).catch(async (erro) => {
+					console.error('Error when close: ', erro); //return object error
+				});
 			}
-		});
-	}
+		}
+	});
+}
 //
 process.stdin.resume(); //so the program will not close instantly
 //
