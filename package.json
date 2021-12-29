@@ -8,7 +8,7 @@
   },
   "devDependencies": {},
   "dependencies": {
-    "dotenv": "^8.2.0",
-    "venom-bot": "^1.1.4"
+    "dotenv": "^10.0.0",
+    "venom-bot": "^4.0.4"
   }
 }
