@@ -1,13 +1,19 @@
 import { create } from 'venom-bot';
 import { stages, getStage } from './stages.js';
 
-create().then((client) => start(client));
+create({ session: 'delicias-neide' })
+  .then((client) => start(client))
+  .catch((error) => {
+    process.exit(error);
+  });
 
 async function start(client) {
   await client.onMessage(async (message) => {
-    if (message.isGroupMsg === false) {
+    const isValidNumber = await client.checkNumberStatus(message.from);
+    if (!message.isGroupMsg && isValidNumber) {
       try {
         const currentStage = getStage({ from: message.from });
+        console.log(currentStage);
 
         const messageResponse = stages[currentStage].stage.exec({
           from: message.from,
@@ -19,6 +25,7 @@ async function start(client) {
           await client.sendText(message.from, messageResponse);
         }
       } catch (error) {
+        console.log(error);
         client.close();
       }
     }

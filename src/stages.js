@@ -39,13 +39,12 @@ export const stages = [
 export function getStage({ from }) {
   if (storage[from]) {
     return storage[from].stage;
-  } else {
-    storage[from] = {
-      stage: 0,
-      itens: [],
-      address: '',
-    };
-
-    return storage[from].stage;
   }
+  storage[from] = {
+    stage: 0,
+    itens: [],
+    address: '',
+  };
+
+  return storage[from].stage;
 }
