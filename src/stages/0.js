@@ -1,9 +1,22 @@
-import { storage } from '../storage.js';
+import { storage } from '../storage.js'
+import { VenomBot } from '../venom.js'
+import { STAGES } from './index.js'
 
 export const initialStage = {
-  exec({ from }) {
-    storage[from].stage = 1;
+  async exec({ from }) {
+    storage[from].stage = STAGES.MENU
 
-    return '👋 Olá, como vai? \n\nEu sou Carlos, o *assistente virtual* da Delícias da Neide. \n*Posso te ajudar?* 🙋‍♂️ \n-----------------------------------\n1️⃣ - ```FAZER PEDIDO``` \n2️⃣ - ```VERIFICAR TAXA DE ENTREGA```\n0️⃣ - ```FALAR COM ATENDENTE```';
+    const venombot = await VenomBot.getInstance()
+
+    const message = `
+      👋 Olá, como vai?
+      Eu sou Carlos, o *assistente virtual* da ${venombot.getSessionName}.
+      *Posso te ajudar?* 🙋‍♂️
+      -----------------------------------
+      1️⃣ - FAZER PEDIDO
+      2️⃣ - VERIFICAR TAXA DE ENTREGA
+      0️⃣ - FALAR COM ATENDENTE
+    `
+    await venombot.sendText({ to: from, message })
   },
-};
+}

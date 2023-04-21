@@ -1,34 +1,40 @@
-import { menu } from '../menu.js';
-import { storage } from '../storage.js';
+import { menu } from '../menu.js'
+import { storage } from '../storage.js'
+import { STAGES } from './index.js'
 
 export const stageTwo = {
-  exec({ from, message }) {
+  async exec({ from, message }) {
     const order =
-      '\n-----------------------------------\n#️⃣ - ```FINALIZAR pedido``` \n*️⃣ - ```CANCELAR pedido```';
-    if (message === '*') {
-      storage[from].stage = 0;
-      storage[from].itens = [];
+      '\n-----------------------------------\n#️⃣ - ```FINALIZAR pedido``` \n*️⃣ - ```CANCELAR pedido```'
 
-      return '🔴 Pedido *CANCELADO* com sucesso. \n\n ```Volte Sempre!```';
-    } else if (message === '#') {
-      storage[from].stage = 3;
+    switch (message) {
+      case '*': {
+        storage[from].stage = STAGES.INICIAL
+        storage[from].itens = []
 
-      return (
-        '🗺️ Agora, informe o *ENDEREÇO*. \n ( ```Rua, Número, Bairro``` ) \n\n ' +
-        '\n-----------------------------------\n*️⃣ - ```CANCELAR pedido```'
-      );
-    } else {
-      if (!menu[message]) {
-        return `❌ *Código inválido, digite novamente!* \n\n ${order}`;
+        return '🔴 Pedido *CANCELADO* com sucesso. \n\n ```Volte Sempre!```'
+      }
+      case '#': {
+        storage[from].stage = STAGES.RESUMO
+
+        return (
+          '🗺️ Agora, informe o *ENDEREÇO*. \n ( ```Rua, Número, Bairro``` ) \n\n ' +
+          '\n-----------------------------------\n*️⃣ - ```CANCELAR pedido```'
+        )
+      }
+      default: {
+        if (!menu[message]) {
+          return `❌ *Código inválido, digite novamente!* \n\n ${order}`
+        }
       }
     }
 
-    storage[from].itens.push(menu[message]);
+    storage[from].itens.push(menu[message])
 
     return (
       `✅ *${menu[message].description}* adicionado com sucesso! \n\n` +
       '```Digite outra opção```: \n\n' +
       order
-    );
+    )
   },
-};
+}

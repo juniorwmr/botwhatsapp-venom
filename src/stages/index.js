@@ -1,8 +1,15 @@
-import { initialStage } from './0.js';
-import { stageOne } from './1.js';
-import { stageTwo } from './2.js';
-import { stageThree } from './3.js';
-import { stageFour } from './4.js';
-import { finalStage } from './5.js';
+export * from './0.js'
+export * from './1.js'
+export * from './2.js'
+export * from './3.js'
+export * from './4.js'
+export * from './5.js'
 
-export { initialStage, stageOne, stageTwo, stageThree, stageFour, finalStage };
+export const STAGES = {
+  INICIAL: '0',
+  MENU: '1',
+  CARRINHO: '2',
+  RESUMO: '3',
+  PEDIDO: '4',
+  FALAR_COM_ATENDENTE: '5',
+}

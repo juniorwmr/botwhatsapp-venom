@@ -5,9 +5,14 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "dev": "node src/server.js"
+    "start": "node src/server.js",
+    "dev": "nodemon src/server.js"
+  },
+  "devDependencies": {
+    "@rocketseat/eslint-config": "^1.2.0",
+    "nodemon": "^2.0.22"
   },
   "dependencies": {
-    "venom-bot": "^4.2.0"
+    "venom-bot": "4.3.7"
   }
 }

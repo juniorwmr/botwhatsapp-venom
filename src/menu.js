@@ -19,4 +19,4 @@ export const menu = {
     description: 'Dois Amores',
     price: 6,
   },
-};
+}

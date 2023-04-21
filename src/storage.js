@@ -1,1 +1,1 @@
-export const storage = Object.create({});
+export const storage = Object.create({})
