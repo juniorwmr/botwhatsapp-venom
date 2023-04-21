@@ -14,15 +14,13 @@ const main = async () => {
 
       const currentStage = getStage({ from: message.from })
 
-      console.log({ from: message.from, message: message.body, currentStage })
-
       await stages[currentStage].stage.exec({
         from: message.from,
         message: message.body,
       })
     })
   } catch (error) {
-    console.log(error)
+    console.error(error)
   }
 }
 

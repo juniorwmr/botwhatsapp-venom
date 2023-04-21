@@ -1,40 +1,56 @@
+import { VenomBot } from '../venom.js'
 import { menu } from '../menu.js'
 import { storage } from '../storage.js'
 import { STAGES } from './index.js'
 
 export const stageTwo = {
-  async exec({ from, message }) {
-    const order =
-      '\n-----------------------------------\n#️⃣ - ```FINALIZAR pedido``` \n*️⃣ - ```CANCELAR pedido```'
+  async exec(params) {
+    const message = params.message.trim()
+    const isMsgValid = /[1|2|3|4|5|#|*]/.test(message)
 
-    switch (message) {
-      case '*': {
-        storage[from].stage = STAGES.INICIAL
-        storage[from].itens = []
+    let msg =
+      '❌ *Digite uma opção válida, por favor.* \n⚠️ ```APENAS UMA OPÇÃO POR VEZ``` ⚠️'
 
-        return '🔴 Pedido *CANCELADO* com sucesso. \n\n ```Volte Sempre!```'
+    if (isMsgValid) {
+      if (['#', '*'].includes(message)) {
+        const option = options[message]()
+        msg = option.message
+        storage[params.from].stage = option.nextStage
+      } else {
+        msg =
+          `✅ *${menu[message].description}* adicionado com sucesso! \n\n` +
+          '```Digite outra opção```: \n\n' +
+          '\n-----------------------------------\n#️⃣ - ```FINALIZAR pedido``` \n*️⃣ - ```CANCELAR pedido```'
+        storage[params.from].itens.push(menu[message])
       }
-      case '#': {
-        storage[from].stage = STAGES.RESUMO
 
-        return (
-          '🗺️ Agora, informe o *ENDEREÇO*. \n ( ```Rua, Número, Bairro``` ) \n\n ' +
-          '\n-----------------------------------\n*️⃣ - ```CANCELAR pedido```'
-        )
-      }
-      default: {
-        if (!menu[message]) {
-          return `❌ *Código inválido, digite novamente!* \n\n ${order}`
-        }
+      if (storage[params.from].stage === STAGES.INICIAL) {
+        storage[params.from].itens = []
       }
     }
 
-    storage[from].itens.push(menu[message])
+    await VenomBot.getInstance().sendText({ to: params.from, message: msg })
+  },
+}
 
-    return (
-      `✅ *${menu[message].description}* adicionado com sucesso! \n\n` +
-      '```Digite outra opção```: \n\n' +
-      order
-    )
+const options = {
+  '*': () => {
+    const message =
+      '🔴 Pedido *CANCELADO* com sucesso. \n\n ```Volte Sempre!```'
+
+    return {
+      message,
+      nextStage: STAGES.INICIAL,
+    }
+  },
+  '#': () => {
+    const message =
+      '🗺️ Agora, informe o *ENDEREÇO*. \n ( ```Rua, Número, Bairro``` ) \n\n ' +
+      '\n-----------------------------------\n*️⃣ - ```CANCELAR pedido```'
+
+    return {
+      message,
+      nextStage: STAGES.RESUMO,
+    }
   },
 }

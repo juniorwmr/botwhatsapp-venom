@@ -1,3 +1,4 @@
+import { VenomBot } from '../venom.js'
 import { storage } from '../storage.js'
 import { STAGES } from './index.js'
 
@@ -14,18 +15,15 @@ export const stageFour = {
     }
 
     const itens = storage[from].itens
-    const desserts = itens.map((item, index) => {
-      if (index === itens.length - 1) {
-        return item.description + '.'
-      }
-      return item.description + ', '
-    })
+    const desserts = itens.map((item) => item.description).join(', ')
     const total = storage[from].itens.length
 
-    return `🔔 *NOVO PEDIDO* 🔔: \n\n📞 Cliente: +${
+    const msg = `🔔 *NOVO PEDIDO* 🔔: \n\n📞 Cliente: +${
       phone[0]
     } \n🧁 Sabores: *${desserts}* \n📍 Endereço: *${address}* \n🚚 Taxa de entrega: *a confirmar*. \n💰 Valor dos bolos: *${
       total * 6
     },00 reais*. \n⏳ Tempo de entrega: *50 minutos*. \n🛑 Detalhes: *${message}*`
+
+    await VenomBot.getInstance().sendText({ to: from, message: msg })
   },
 }
