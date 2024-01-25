@@ -13,6 +13,6 @@
     "nodemon": "^2.0.22"
   },
   "dependencies": {
-    "venom-bot": "^5.0.20"
+    "venom-bot": "^5.0.21"
   }
 }
