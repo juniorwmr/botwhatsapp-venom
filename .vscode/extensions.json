@@ -1,0 +1,10 @@
+{
+  "recommendations": [
+    "esbenp.prettier-vscode",
+    "dbaeumer.vscode-eslint",
+    "editorconfig.editorconfig",
+    "snyk-security.snyk-vulnerability-scanner",
+    "humao.rest-client",
+    "Prisma.prisma"
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "name": "vitest-environment-prisma",
+  "version": "1.0.0",
+  "description": "",
+  "type": "module",
+  "main": "prisma-test-environment.mjs",
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

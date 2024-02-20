@@ -1,0 +1,23 @@
+version: '3.4'
+services:
+  database_tmpfs:
+    container_name: database_tmpfs
+    image: postgres:14-alpine
+    ports:
+      - 9999:5432
+    tmpfs:
+      - /var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=root
+      - POSTGRES_DB=app
+  database:
+    container_name: database
+    image: postgres:14-alpine
+    ports:
+      - 8282:5432
+    environment:
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=root
+      - POSTGRES_DB=app
+

@@ -1,5 +1,12 @@
 {
   "extends": [
     "@rocketseat/eslint-config/node"
-  ]
+  ],
+  "rules": {
+    "no-console": "warn",
+    "no-useless-constructor": "off",
+    "no-use-before-define": "off",
+    "@typescript-eslint/no-empty-function": "off",
+    "@typescript-eslint/no-namespace": "off"
+  }
 }
